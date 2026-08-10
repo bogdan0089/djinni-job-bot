@@ -75,7 +75,7 @@ app/
 ├── middlewares/   DB session + service injection, anti-flood
 ├── schemas/       pydantic models (Vacancy, Experience, user DTOs)
 ├── services/      business logic
-├── utils/         message building (Telegram 4096-char splitting)
+├── utils/         message building (4096-char splitting), keyword validation
 └── main.py        composition root
 tests/             107 tests on an in-memory SQLite DB, no network
 ```

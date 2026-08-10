@@ -1,0 +1,13 @@
+services:
+  bot:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      # Keeps the SQLite file across container rebuilds
+      - bot-data:/app/data
+    environment:
+      DATABASE_URL: sqlite+aiosqlite:////app/data/bot.db
+
+volumes:
+  bot-data:

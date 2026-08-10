@@ -1,0 +1,26 @@
+[project]
+name = "djinni-job-bot"
+description = "Telegram bot that delivers Djinni.co vacancies matching your filters"
+# StrEnum and datetime.UTC require 3.11
+requires-python = ">=3.11"
+
+# Runtime dependencies live in requirements.txt: this is an application deployed
+# with Docker, not a package installed from an index. Keeping them there lets the
+# image install them before the source is copied, so a code change does not
+# invalidate the dependency layer.
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+addopts = "-q"
+# Without this, bare `pytest` cannot import `app` — only `python -m pytest`
+# works, because it puts the working directory on sys.path.
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "ASYNC", "SIM", "RUF"]

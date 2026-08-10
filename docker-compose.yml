@@ -4,10 +4,9 @@ services:
     restart: unless-stopped
     env_file: .env
     volumes:
-      # Keeps the SQLite file across container rebuilds
+      # Keeps the SQLite file across container rebuilds.
+      # DATABASE_URL already points here (see Dockerfile).
       - bot-data:/app/data
-    environment:
-      DATABASE_URL: sqlite+aiosqlite:////app/data/bot.db
 
 volumes:
   bot-data:

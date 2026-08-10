@@ -4,6 +4,7 @@ import logging
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
+from aiogram.exceptions import TelegramUnauthorizedError
 from aiogram.types import BotCommand
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
@@ -70,7 +71,13 @@ async def main() -> None:
     dispatcher = create_dispatcher(parser)
 
     try:
-        await bot.set_my_commands(COMMANDS)
+        try:
+            await bot.set_my_commands(COMMANDS)
+        except TelegramUnauthorizedError:
+            # A wrong token is the most common deploy mistake; a traceback here
+            # buries the one line that actually matters.
+            logger.error("BOT_TOKEN is rejected by Telegram. Check it with @BotFather.")
+            return
         scheduler.start()
         logger.info(
             "Bot started. Daily digest at %02d:%02d %s",

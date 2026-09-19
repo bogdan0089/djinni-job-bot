@@ -5,6 +5,9 @@
 Telegram bot that watches the [Djinni.co](https://djinni.co) RSS feed and delivers vacancies
 matching your stack, experience level and salary expectations — on demand and as a daily digest.
 
+**▶ Try it:** https://t.me/ai_hheellppeerr_BOT — send `/start`. It runs on AWS in Docker, with the
+SQLite database on a named volume so subscriptions survive rebuilds.
+
 ## Features
 
 - **Daily digest** at a configurable local time (APScheduler, real timezone support)
